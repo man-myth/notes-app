@@ -25,9 +25,10 @@
                         <livewire:welcome.navigation />
                     @endif
                 </header>
-                <div class="flex lg:justify-center lg:col-start-2">
-                        <x-application-logo class="w-auto h-9 " />
-                    </div>
+                <div class="flex flex-col gap-4 lg:justify-center lg:col-start-2">
+                        <x-application-logo class="w-auto h-12" />
+                        <x-button primary xl href="{{route('register')}} "> Get Started </x-button>
+                </div>
 
 
                 <footer class="py-16 text-sm text-center text-black dark:text-white/70">
