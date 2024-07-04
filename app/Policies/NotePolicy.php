@@ -37,7 +37,7 @@ class NotePolicy
      */
     public function update(User $user, Note $note): bool
     {
-        return $note->user_id === $user->id;
+        return $note->user_id === $user->id && $note->send_date >= now();
     }
 
     /**
