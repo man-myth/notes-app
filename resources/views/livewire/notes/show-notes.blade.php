@@ -6,7 +6,10 @@ use App\Models\Note;
 new class extends Component {
 
     public function delete($noteId){
-        Note::where('id', $noteId)->first()->delete();
+        $note = Note::where('id', $noteId)->first();
+        $this->authorize('delete', $note);
+        
+        $note->delete();
     }
 
     public function with(): array
@@ -31,7 +34,7 @@ new class extends Component {
                 <x-card rounded wire:key='{{ $note->id }}' class="p-2 bg-gray-900">
                     <div class="flex justify-between">
                         <div>
-                         <a href="#" class="text-xl font-bold text-black hover:underline hover:text-yellow-500 ">
+                         <a href="{{route('note.edit', $note)}}" wire:navigate class="text-xl font-bold text-black hover:underline hover:text-purple-700 ">
                             {{ $note->title }}
                         </a>
                         <p class="mt-2 text-sm"> {{Str::limit($note->body, 50)}}</p>

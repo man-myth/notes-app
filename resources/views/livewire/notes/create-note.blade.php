@@ -22,7 +22,7 @@ new class extends Component {
             'body'=>$this->noteBody, 
             'recipient'=>$this->noteRecipient, 
             'send_date'=>$this->noteSendDate,
-            'is_published'=>false,
+            'is_published'=>true,
         ]);
 
         redirect(route('notes.index'));
@@ -37,7 +37,7 @@ new class extends Component {
         <x-textarea wire:model='noteBody' label='Body' placeholder="five, six, seven, ate, nine....." />
         <x-input icon="user" wire:model='noteRecipient' label='Recipient' placeholder="sample@email.com" />
         <x-input icon="calendar" wire:model='noteSendDate' type="date" label='Send Date' />
-        <x-button rounded wire:click='submit' class="mt-6" right-icon="calendar" spinner>Submit</x-button>
+        <x-button rounded type='submit' class="mt-6" right-icon="calendar" spinner>Submit</x-button>
         <x-errors/>
     </form>
 
