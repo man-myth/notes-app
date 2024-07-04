@@ -38,6 +38,8 @@ new #[Layout('layouts.app')] class extends Component {
             'send_date' => $this->noteSendDate,
             'is_published' => $this->isPublished,
         ]);
+
+        $this->dispatch('note-saved');
     }
 }; ?>
 
@@ -58,6 +60,8 @@ new #[Layout('layouts.app')] class extends Component {
             <x-input icon="calendar" wire:model='noteSendDate' type="date" label='Send Date' />
             <x-checkbox label="Note Published" wire:model='isPublished'/>
             <x-button rounded type="submit" class="mt-6" spinner="saveNote">Save</x-button>
+            {{-- <x-alert title="Success Message!" positive outline on="note-saved"/> --}}
+            <x-action-message on="note-saved"></x-action-message>
             <x-errors />
         </form>
     </div>
