@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Noteify</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -13,29 +13,39 @@
 
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <wireui:scripts />
 </head>
 
-<body class="font-sans antialiased">
-    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-        <div
-            class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
-            <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                <header class="items-center gap-2 py-10 ">
-                    @if (Route::has('login'))
-                        <livewire:welcome.navigation />
-                    @endif
-                </header>
-                <div class="flex flex-col gap-4 lg:justify-center lg:col-start-2">
-                        <x-application-logo class="w-auto h-12" />
-                        <x-button primary xl href="{{route('register')}} "> Get Started </x-button>
-                </div>
-
-
-                <footer class="py-16 text-sm text-center text-black dark:text-white/70">
-                    © 2024
-                </footer>
+<body class="font-sans antialiased bg-gray-100">
+    <div class="flex flex-col justify-between min-h-screen">
+        <!-- Header -->
+        <header class="py-4 bg-indigo-700 ">
+            <div class="container px-10 ">
+                <!-- Navigation component -->
+                @if (Route::has('login'))
+                    <livewire:welcome.navigation />
+                @endif
             </div>
-        </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex items-center">
+            <div class="container text-center">
+                <div class="flex flex-col justify-center max-w-2xl p-10 mx-auto bg-white shadow-lg rounded-3xl">
+                    <x-application-logo class="w-auto h-20" />
+                    <h1 class="mt-4 text-4xl font-bold">Welcome to Noteify</h1>
+                    <p class="mt-2 text-lg text-gray-600">Your ultimate note-taking app.</p>
+                    <x-button primary xl href="{{ route('register') }}" class="w-full mt-8">Get Started</x-button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-4 text-center border-t-2">
+            <div class="container mx-auto">
+                <span class="text-gray-600">&copy; 2024 man-myth. All rights reserved.</span>
+            </div>
+        </footer>
     </div>
 </body>
 
