@@ -10,6 +10,6 @@
 
 
 ##todo
-1. pagination
+1. Filter
 2. Search
 3. File Upload

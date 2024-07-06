@@ -15,13 +15,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'admin@admin.com',
             'password' => "admin"
         ]);
         User::all()->each(function(User $user){
-            Note::factory()->count(10)->create([
+            Note::factory()->count(1000)->create([
                 'user_id' => $user->id,
             ]);
         });
