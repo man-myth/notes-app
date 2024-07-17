@@ -25,6 +25,7 @@ Noteify is a powerful and user-friendly app designed to help you create, manage,
 - **Livewire**: Full-stack framework for Laravel that makes building dynamic interfaces simple.
 - **Breeze**: Simple, minimal Laravel authentication.
 - **Livewire Volt**: Enhanced components for Livewire.
+- **WireUI** : Simple, Fast, and Elegant Blade Components for Alpine.js, Tailwind, Livewire, and the Tall Stack.
 
 ### Setup Instructions
 To set up the project locally, follow these steps:

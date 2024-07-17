@@ -2,11 +2,19 @@
 
 use Livewire\Volt\Component;
 use App\Models\Note;
-use Livewire\WithPagination;
+use Carbon\Carbon;
+
 
 new class extends Component {
-    use WithPagination;
 
+    public $notes;
+    public $showSentNotes = false;
+
+    public function mount()
+    {
+       $this->loadNotes();
+    }
+    
     public function delete($noteId)
     {
         $note = Note::where('id', $noteId)->first();
@@ -14,11 +22,27 @@ new class extends Component {
 
         $note->delete();
     }
-    public function with(): array
+
+    public function toggleSentNotes()
     {
-        return [
-            'notes' => auth()->user()->notes()->orderBy('send_date', 'asc')->paginate(10),
-        ];
+        $this->showSentNotes = !$this->showSentNotes;
+
+       $this->loadNotes();
+    }
+
+    public function loadNotes()
+    {
+        // Load notes based on $showSentNotes flag
+        if ($this->showSentNotes) {
+            $this->notes = auth()->user()->notes()
+                ->orderBy('send_date', 'asc') // Newest first
+                ->get(); // Paginate results
+        } else {
+            $this->notes = auth()->user()->notes()
+                ->where('send_date', '>', Carbon::now()) // Future notes
+                ->orderBy('send_date', 'asc') // Oldest first
+                ->get(); // Paginate results
+        }
     }
 
     public function placeholder()
@@ -47,8 +71,19 @@ new class extends Component {
                 Note</x-button>
         </div>
     @else
-        <x-button primary icon="plus" class="mb-6" href="{{ route('notes.create') }}" wire:navigate>Create
-            Note</x-button>
+        <x-button primary icon="plus" class="mb-6" href="{{ route('notes.create') }}" wire:navigate>Create</x-button>
+        
+        @if ($showSentNotes)
+            <x-button wire:click="toggleSentNotes()" primary icon="paper-airplane" class="mb-6">
+                Sent
+            </x-button>
+        @else
+            <x-button wire:click="toggleSentNotes()" secondary icon="paper-airplane" class="mb-6">
+                Sent
+                 </x-button>
+        @endif
+
+
         <div class='grid grid-cols-2 gap-4 mt-12'>
             @foreach ($notes as $note)
                 <x-card rounded wire:key='{{ $note->id }}' class="p-2 bg-gray-900">
@@ -85,7 +120,7 @@ new class extends Component {
             @endforeach
 
         </div>
-         {{ $notes->links() }}
+       
     @endif
 
 </div>
