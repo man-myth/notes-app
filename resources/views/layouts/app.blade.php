@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Noteify') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,7 +18,7 @@
 
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="flex flex-col justify-between min-h-screen bg-gray-100 dark:bg-gray-900">
             <livewire:layout.navigation />
 
             <!-- Page Heading -->
@@ -34,6 +34,11 @@
             <main>
                 {{ $slot }}
             </main>
+                    <footer class="py-4 text-center border-t-2">
+            <div class="container mx-auto">
+                <span class="text-gray-600">&copy; 2024 man-myth. All rights reserved.</span>
+            </div>
+        </footer>
         </div>
     </body>
 </html>
